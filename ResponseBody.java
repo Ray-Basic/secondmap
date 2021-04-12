@@ -1,4 +1,4 @@
-@ResponseBody
+@SresponseBody
     @RequestMapping(value = "/rtInfomartion", method=RequestMethod.GET.produces = "application/text; charset=utf8")
     public String rtInfomartion(Locale locale, Model model) throws IOException{
         StringBuilder urlBuilder = new StringBuilder("http://openapi.tago.go.kr/openapi/service/BusLcInfoInqireService/getRouteAcctoBusLcList");
