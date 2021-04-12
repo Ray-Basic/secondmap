@@ -14,12 +14,16 @@
 var mapOptions = {
     center: new naver.maps.LatLng(36.96981663364983, 127.87131627037276),
     zoom: 10
+    position: new.naver.maps.LatLng(36.96981663364983, 127.87131627037276),
+    map:map
 };
+
 
 //url1 = "http://openapi.tago.go.kr/openapi/service/BusLcInfoInqireService/getRouteAcctoBusLcList?ServiceKey=NJPq5bgNwTn08ylVVjGuBpmtiwARPqc%2BUR4WPrIf5advbjU9WA1RrL1SIMjKUNhRHh2fKE8QOVUpf6%2FBu9lCpA%3D%3D&cityCode=33020&routeId=CHB272000377"
 
 //size = new naver.map.Size(3440, 2160);
 var map = new naver.maps.Map('map', mapOptions);
+var marker = new naver.maps.Map('marker', mapOptions);
 </script>
 </body>
 </html>
