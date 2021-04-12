@@ -27,25 +27,3 @@
         return sb.toString();
     
 }
-
-$.ajax({
-    url:'/rtInfomartion',
-    type : "GET",
-    dataType : "text",
-    success : function(data){
-
-        if(data){
-            map = new.naver.maps.Map('map',mapOptions);
-
-            $(data).find('itemList').each(function(){
-                var gpslati = $(this).find("gpslati").text();
-                var gpslong = $(this).find("gpslong").text();
-
-                marker = new naver.maps.Marker({
-                    position: new naver.maps.LatLng(gpslati, gpslong),
-                    map:map
-                });
-            });
-        }
-    }
-});
