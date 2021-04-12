@@ -9,31 +9,21 @@
 </head>
 <body>
 <div id="map" style="width:100%;height:1000px;"></div>               
-<script src="SresponseBody.java">  
-$.ajax({
-    url:'/rtInfomartion',
-    type : "GET",
-    dataType : "text",
-    success : function(data){
-
-        if(data){
-            var map = new.naver.maps.Map('map',mapOptions);
-
-            $(data).find('itemList').each(function(){
-                var gpslati = $(this).find("gpslati").text();
-                var gpslong = $(this).find("gpslong").text();
-
-                var marker = new naver.maps.Marker({
-                    position: new naver.maps.LatLng(gpslati, gpslong),
-                    map:map
-                });
-            });
-        }
-    }
+<script>
+var map = new naver.maps.Map('map', {
+    center: new naver.maps.LatLng(36.96981663364983, 127.87131627037276),
+    zoom: 16
 });
+
+var marker = new naver.maps.Marker({
+    position: new naver.maps.LatLng(36.96981663364983, 127.87131627037276),
+    map: map
+});
+
+//url1 = "http://openapi.tago.go.kr/openapi/service/BusLcInfoInqireService/getRouteAcctoBusLcList?ServiceKey=NJPq5bgNwTn08ylVVjGuBpmtiwARPqc%2BUR4WPrIf5advbjU9WA1RrL1SIMjKUNhRHh2fKE8QOVUpf6%2FBu9lCpA%3D%3D&cityCode=33020&routeId=CHB272000377"
+
 //size = new naver.map.Size(3440, 2160);
 //var map = new naver.maps.Map('map', mapOptions);
-// 정 안되면 그냥 네이버지도 링크 붙여넣기?
 </script>
 </body>
 </html>
