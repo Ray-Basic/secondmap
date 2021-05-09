@@ -10,18 +10,55 @@
 <body>
 <div id="map" style="width:100%;height:1000px;"></div>               
 <script>
+    function loadDoc() {
+		var xmlHttp = new XMLHttpRequest();
+		xmlHttp.onreadystatechange = function() {
+			if(this.status == 200 && this.readyState == this.DONE) {
+				findResult(xmlHttp);
+			}
+		};
+		xmlHttp.open("GET", "http://openapi.tago.go.kr/openapi/service/BusLcInfoInqireService/getRouteAcctoBusLcList?ServiceKey=NJPq5bgNwTn08ylVVjGuBpmtiwARPqc%2BUR4WPrIf5advbjU9WA1RrL1SIMjKUNhRHh2fKE8QOVUpf6%2FBu9lCpA%3D%3D&cityCode=33020&routeId=CHB272000377", true);
+		xmlHttp.send();
+	}
+
+	function findResult(xmlHttp) {
+		var xmlObj, path, result, nodeList, node;
+		xmlObj = xmlHttp.responseXML;
+		path = "//gpslong"; //동시에 경도랑 위도 띄워야함.
+		result = "";
+	
+		// 익스플로러를 위한 코드
+		if (window.ActiveXObject !== undefined || xmlHttp.responseType == "msxml-document") {
+			xmlObj.setProperty("SelectionLanguage", "XPath");
+			nodeList = xmlObj.selectNodes(path);
+
+			for (i=0; i<nodeList.length; i++) {
+				result += nodeList[i].text + "<br>";
+			}
+		// 익스플로러를 제외한 브라우저를 위한 코드
+		} else if (document.implementation && document.implementation.createDocument) {
+			nodeList = xmlObj.evaluate(path, xmlObj, null, XPathResult.ANY_TYPE, null);
+			node = nodeList.iterateNext();
+
+				while (node) {
+				result += node.firstChild.nodeValue + "<br>";
+				node = nodeList.iterateNext();
+			}
+		}
+		
+		document.getElementById("text").innerHTML = result;
+	}
 var map = new naver.maps.Map('map', {
     center: new naver.maps.LatLng(36.96981663364983, 127.87131627037276),
     zoom: 16
 });
 
 var marker = new naver.maps.Marker({
-    position: new naver.maps.LatLng(36.96981663364983, 127.87131627037276),
+    position: new naver.maps.LatLng(36.96981663364983, path),
     map: map
 });
 
 //url1 = "http://openapi.tago.go.kr/openapi/service/BusLcInfoInqireService/getRouteAcctoBusLcList?ServiceKey=NJPq5bgNwTn08ylVVjGuBpmtiwARPqc%2BUR4WPrIf5advbjU9WA1RrL1SIMjKUNhRHh2fKE8QOVUpf6%2FBu9lCpA%3D%3D&cityCode=33020&routeId=CHB272000377"
-
 //size = new naver.map.Size(3440, 2160);
 //var map = new naver.maps.Map('map', mapOptions);
 </script>
